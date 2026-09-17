@@ -36,20 +36,7 @@
     "plugins": [
       "expo-router",
       "expo-font",
-      "expo-splash-screen",
-      [
-        "expo-build-properties",
-        {
-          "android": {
-            "compileSdkVersion": 34,
-            "targetSdkVersion": 34,
-            "minSdkVersion": 24
-          },
-          "ios": {
-            "useFrameworks": "static"
-          }
-        }
-      ]
+      "expo-splash-screen"
     ],
     "scheme": "docnest",
     "extra": {
