@@ -38,11 +38,7 @@ jobs:
         run: npm install --legacy-peer-deps
 
       - name: Build Android APK
-        run: |
-          npx eas-cli build --platform android --profile ${{ github.event.inputs.build_type || 'preview' }} --non-interactive
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: eas build --platform android --profile ${{ github.event.inputs.build_type || 'preview' }} --non-interactive
+        run: npx eas-cli build --platform android --profile ${{ github.event.inputs.build_type || 'preview' }} --non-interactive
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
