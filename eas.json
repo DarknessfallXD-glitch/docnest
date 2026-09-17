@@ -25,5 +25,10 @@
   },
   "submit": {
     "production": {}
+  },
+  "npm": {
+    "version": "10.8.0",
+    "cache": true,
+    "legacyPeerDeps": true
   }
 }
