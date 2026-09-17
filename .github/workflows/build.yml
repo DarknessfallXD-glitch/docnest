@@ -18,7 +18,7 @@ jobs:
   build:
     name: Build Android APK
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -36,32 +36,20 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Build Android APK
-        run: eas build --platform android --profile ${{ github.event.inputs.build_type || 'preview' }} --non-interactive --no-wait
+        run: eas build --platform android --profile ${{ github.event.inputs.build_type || 'preview' }} --non-interactive
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-
-      - name: Wait for build
-        uses: expo/wait-for-build-action@v1
-        with:
-          build-id: ${{ steps.build.outputs.build-id }}
-          timeout: 30
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: app-apk
-          path: ./apk
 
       - name: Upload APK as artifact
         uses: actions/upload-artifact@v4
         with:
           name: DocNest-APK
-          path: ./apk/*.apk
+          path: |
+            **/*.apk
+            **/*.aab
           retention-days: 30
 
   release:
